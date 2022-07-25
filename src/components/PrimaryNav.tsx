@@ -2,6 +2,7 @@ import { FC, Fragment } from "react";
 import openSaucedLogo from '../assets/openSauced.svg'
 import { Menu, Transition } from '@headlessui/react'
 import useSupabaseAuth from "../hooks/useSupabaseAuth";
+import {User} from "@supabase/supabase-js";
 import { capturePostHogAnayltics } from "../lib/analytics";
 import { GiHamburgerMenu } from "react-icons/gi"
 import { version } from "../../package.json";
@@ -10,16 +11,14 @@ interface NavProps {
   auth: {
     signIn: (provider: object)=> void,
     signOut: ()=> void,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    user: any
+    user: User | null;
   }
 }
 interface MenuProps {
   auth: {
     signIn: (provider: object)=> void,
     signOut: ()=> void,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    user: any
+    user: User | null
   }
 }
 
@@ -212,7 +211,6 @@ const MobileNav:FC<NavProps> = ({auth}) => {
 }
 
 const UserMenu:FC<MenuProps> = ({auth}) => {
-  console.log(auth)
   return(
       <Menu as="div" className="relative z-50 inline-block text-left">
         <div>
